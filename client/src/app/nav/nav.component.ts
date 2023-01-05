@@ -30,11 +30,11 @@ export class NavComponent implements OnInit {
       /*next: response => {
         //console.log(response);
       },*/
-      error: err => {
+      /*error: err => {
         this.toastr.error(err.error,'Error',{
           timeOut: 1000,
         });
-      }
+      }*/
     });
   }
 
