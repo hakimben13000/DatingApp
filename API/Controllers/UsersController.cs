@@ -1,5 +1,8 @@
 ﻿using API.Data;
+using API.DTOs;
 using API.Entities;
+using API.Repository;
+using AutoMapper;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
@@ -11,26 +14,39 @@ namespace API.Controllers
     [Authorize]
     public class UsersController : BaseApiController
     {
-        private readonly DataContext _context;
+        private readonly IUserRepository userRepository;
+        private readonly IMapper mapper;
 
-        public UsersController(DataContext context)
-        {
-            _context = context;
+        public UsersController(IUserRepository userRepository,IMapper mapper)
+        {           
+            this.userRepository = userRepository;
+            this.mapper = mapper;
         }
 
-        [AllowAnonymous]
+        //[AllowAnonymous]
         [HttpGet]
-        public async Task<ActionResult<IEnumerable<AppUser>>> GetUsers()
+        public async Task<ActionResult<IEnumerable<MemberDto>>> GetUsers()
         {
-            var users = await _context.Users.ToListAsync();
-            return users;
+            //  var users = await userRepository.GetUsersAsync();
+            //  var usersToReturn = mapper.Map<IEnumerable<MemberDto>>(users); // Map from AppUser to MemberDto
+            var usersToReturn = await userRepository.GetMembersAsync();
+            return  Ok(usersToReturn);
         }
 
   
-        [HttpGet("{id}")]
+      /*  [HttpGet("{id}")]
         public async Task<ActionResult<AppUser>> GetUser(int id)
         {
-            return await _context.Users.FindAsync(id);
+            return await userRepository.GetUserByIdAsync(id);
+        }
+      */
+        [HttpGet("{username}")]
+        public async Task<ActionResult<MemberDto>> GetUserByUserName(string username)
+        {
+            // var user = await userRepository.GetUserByUsernameAsync(username); // Get user from database but if we don't use mapper we got circular reference of AppUser and Photo
+            //var userToReturn = mapper.Map<MemberDto>(user); // Map from AppUser to MemberDto
+            return await userRepository.GetMemberAsync(username);
+            
         }
 
     }
