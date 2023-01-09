@@ -1,5 +1,5 @@
-import { HttpClient } from '@angular/common/http';
 import { Component, OnInit } from '@angular/core';
+import { environment } from 'src/environments/environment';
 
 @Component({
   selector: 'app-home',
@@ -9,30 +9,21 @@ import { Component, OnInit } from '@angular/core';
 export class HomeComponent implements OnInit {
   registerMode = false;
   users: any;
-  baseUrl="https://localhost:5001/api/";
+  baseUrl=environment.apiUrl;
 
-  constructor(private http:HttpClient) { }
+  constructor() { }
 
   ngOnInit(): void {
-    this.getUsers();
   }
 
   registerToggle() {
     this.registerMode = !this.registerMode;
   }
 
-  getUsers(){
-    this.http.get(this.baseUrl+'users/').subscribe( {
-      next: response => this.users = response,
-      error: err => console.log(err),
-      complete: () => console.log('Request completed')
-      
-    });
-  }
+  
 
   cancelRegisterMode(event: boolean) {
     this.registerMode = event;  // registerMode is set to false when the cancel button is clicked in the register component 
-   
   }
 
 }

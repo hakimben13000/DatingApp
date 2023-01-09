@@ -17,6 +17,8 @@ import { TestErrorComponent } from './errors/test-error/test-error.component';
 import { ErrorInterceptor } from './_interceptors/error.interceptor';
 import { NotFoundComponent } from './errors/not-found/not-found.component';
 import { ServerErrorComponent } from './errors/server-error/server-error.component';
+import { MemberCardComponent } from './members/member-card/member-card.component';
+import { JwtInterceptor } from './_interceptors/jwt.interceptor';
 
 
 @NgModule({
@@ -31,18 +33,20 @@ import { ServerErrorComponent } from './errors/server-error/server-error.compone
     MessagesComponent,
     TestErrorComponent,
     NotFoundComponent,
-    ServerErrorComponent
+    ServerErrorComponent, //  pour gérer les erreurs HTTP
+    MemberCardComponent
   ],
   imports: [
     BrowserModule,
-    AppRoutingModule,
+    AppRoutingModule, // pour gérer les routes de l'application 
     HttpClientModule, // permet d'ajouter un module de requêtes HTTP
-    FormsModule, // pour les formulaire relier entre le composant .ts  et le template .html
-    BrowserAnimationsModule,
-    SharedModule
+    FormsModule, // permet d'ajouter un module de formulaires réactifs (ngModel) 
+    BrowserAnimationsModule, // pour gérer les animations de l'application 
+    SharedModule 
   ],
   providers: [
-    {provide: HTTP_INTERCEPTORS, useClass: ErrorInterceptor, multi: true}
+    {provide: HTTP_INTERCEPTORS, useClass: ErrorInterceptor, multi: true}, // pour intercepter les erreurs HTTP et les gérer dans  ErrorInterceptor
+    {provide: HTTP_INTERCEPTORS, useClass: JwtInterceptor, multi: true} // pour intercepter les requêtes HTTP et ajouter le token d'authentification dans le header de la requête
   ],
   bootstrap: [AppComponent]
 })

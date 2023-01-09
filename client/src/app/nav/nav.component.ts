@@ -17,8 +17,8 @@ export class NavComponent implements OnInit {
   constructor(public accountService:AccountService, private router: Router,private toastr: ToastrService) { }
 
   ngOnInit(): void {
-      this.model.username="sarah";
-      this.model.password="password";
+      this.model.username="lisa";
+      this.model.password="Pa$$w0rd";
   }
 
  
