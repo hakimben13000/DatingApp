@@ -7,6 +7,7 @@ using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
+using System.Security.Claims;
 
 namespace API.Controllers
 {
@@ -48,6 +49,21 @@ namespace API.Controllers
             return await userRepository.GetMemberAsync(username);
             
         }
+
+        [HttpPut]
+        public async Task<ActionResult> UpdateUser( MemberUpdateDto memberUpdateDto)
+        {
+            var username = User.FindFirst(ClaimTypes.NameIdentifier)?.Value; // Get current user by getting  username from token , we have used username as JwtRegisteredClaimNames.NameId in TokenService 
+            var user = await userRepository.GetUserByUsernameAsync(username);
+
+            if (user == null) return NotFound();
+            
+            mapper.Map(memberUpdateDto, user);
+            userRepository.Update(user);
+            if (await userRepository.SaveAllAsync()) return NoContent();
+            return BadRequest("Failed to update user");
+        }
+
 
     }
 }

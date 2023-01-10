@@ -19,6 +19,8 @@ import { NotFoundComponent } from './errors/not-found/not-found.component';
 import { ServerErrorComponent } from './errors/server-error/server-error.component';
 import { MemberCardComponent } from './members/member-card/member-card.component';
 import { JwtInterceptor } from './_interceptors/jwt.interceptor';
+import { MemberEditComponent } from './members/member-edit/member-edit.component';
+import { LoadingInterceptor } from './_interceptors/loading.interceptor';
 
 
 @NgModule({
@@ -34,7 +36,7 @@ import { JwtInterceptor } from './_interceptors/jwt.interceptor';
     TestErrorComponent,
     NotFoundComponent,
     ServerErrorComponent, //  pour gérer les erreurs HTTP
-    MemberCardComponent
+    MemberCardComponent, MemberEditComponent
   ],
   imports: [
     BrowserModule,
@@ -46,7 +48,10 @@ import { JwtInterceptor } from './_interceptors/jwt.interceptor';
   ],
   providers: [
     {provide: HTTP_INTERCEPTORS, useClass: ErrorInterceptor, multi: true}, // pour intercepter les erreurs HTTP et les gérer dans  ErrorInterceptor
-    {provide: HTTP_INTERCEPTORS, useClass: JwtInterceptor, multi: true} // pour intercepter les requêtes HTTP et ajouter le token d'authentification dans le header de la requête
+    {provide: HTTP_INTERCEPTORS, useClass: JwtInterceptor, multi: true}, // pour intercepter les requêtes HTTP et ajouter le token d'authentification dans le header de la requête
+    {provide: HTTP_INTERCEPTORS, useClass: LoadingInterceptor, multi: true} // pour intercepter les requêtes HTTP et afficher un spinner de chargement pendant le chargement des requêtes HTTP 
+    // mais il faut ajouter <ngx-spinner> dans l'html <ngx-spinner type="line-scale-party"> </ngx-spinner> nous l'avons ajouter dans app.module
+    
   ],
   bootstrap: [AppComponent]
 })

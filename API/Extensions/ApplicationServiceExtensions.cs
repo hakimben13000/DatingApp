@@ -15,7 +15,7 @@ namespace API.Extensions
                 opt.UseSqlite(config.GetConnectionString("DefaultConnection"));
             });
             services.AddCors();
-            services.AddScoped<ITokenService, TokenService>();
+            services.AddScoped<ITokenService, TokenService>(); // add scoped service for token service 
             services.AddScoped<IUserRepository, UserRepository>();
             services.AddAutoMapper(AppDomain.CurrentDomain.GetAssemblies()); // AddAutoMapper is in Extensions folder that contain AutoMapperExtensions.cs file with AddAutoMapper and GetAssemblies to current domain
             return services;
