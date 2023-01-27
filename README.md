@@ -11,6 +11,8 @@ The app will have features such as:
 - Matching 
 - Messaging 
 
-The app will be tested and optimized to ensure maximum performance and usability. 
+the application is not yet finalized, The app will be tested and optimized to ensure maximum performance and usability. 
 
 We hope you enjoy our app and find it useful!
+Hakim
+
