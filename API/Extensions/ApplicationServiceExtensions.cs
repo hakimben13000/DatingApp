@@ -1,4 +1,5 @@
 ﻿using API.Data;
+using API.Helpers;
 using API.Interfaces;
 using API.Repository;
 using API.Services;
@@ -18,6 +19,8 @@ namespace API.Extensions
             services.AddScoped<ITokenService, TokenService>(); // add scoped service for token service 
             services.AddScoped<IUserRepository, UserRepository>();
             services.AddAutoMapper(AppDomain.CurrentDomain.GetAssemblies()); // AddAutoMapper is in Extensions folder that contain AutoMapperExtensions.cs file with AddAutoMapper and GetAssemblies to current domain
+            services.Configure<CloudinarySettings>(config.GetSection("CloudinarySettings")); // add cloudinary settings to config 
+            services.AddScoped<IPhotoService, PhotoService>();
             return services;
         }
     }

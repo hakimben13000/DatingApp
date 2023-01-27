@@ -43,6 +43,13 @@ export class MembersService {
     ); 
   }
 
+  setMainPhoto(photoId:number){
+    return this.http.put(this.baseUrl + 'users/set-main-photo/' + photoId, {});
+  }
+
+  deletePhoto(photoId:number){
+    return this.http.delete(this.baseUrl+'users/delete-photo/'+photoId);
+  }
   
   /*getHttpOptions(){ // ce code est remplacé par le code dans le intercepteur pour éviter d'ajouter le token à chaque appel
     const userString =localStorage.getItem('user');
