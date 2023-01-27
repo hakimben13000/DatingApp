@@ -14,5 +14,5 @@ The app will have features such as:
 the application is not yet finalized, The app will be tested and optimized to ensure maximum performance and usability. 
 
 We hope you enjoy our app and find it useful!
-Hakim
+Hakim ben
 
