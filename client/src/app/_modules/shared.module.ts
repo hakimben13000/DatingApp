@@ -6,6 +6,7 @@ import { TabsModule } from 'ngx-bootstrap/tabs';
 import { NgxGalleryModule } from '@kolkov/ngx-gallery';
 import { NgxSpinnerModule } from "ngx-spinner";
 import { FileUploadModule } from 'ng2-file-upload';
+import { BsDatepickerModule } from 'ngx-bootstrap/datepicker';
 
 
 @NgModule({
@@ -21,7 +22,8 @@ import { FileUploadModule } from 'ng2-file-upload';
     NgxSpinnerModule.forRoot({ // module to show waiting spinner while loading
       type: 'line-scale-party'
     }),
-    FileUploadModule // module to upload files ( ng2-file-upload)
+    FileUploadModule, // module to upload files ( ng2-file-upload),
+    BsDatepickerModule.forRoot(), // module to show date picker (ngx-bootstrap/datepicker)
 
   ],
   exports: [
@@ -30,7 +32,8 @@ import { FileUploadModule } from 'ng2-file-upload';
     ToastrModule,
     NgxGalleryModule ,
     NgxSpinnerModule ,
-    FileUploadModule
+    FileUploadModule,
+    BsDatepickerModule
   ]
 })
 export class SharedModule { }

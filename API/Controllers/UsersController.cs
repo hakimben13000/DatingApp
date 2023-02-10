@@ -35,7 +35,15 @@ namespace API.Controllers
             //  var users = await userRepository.GetUsersAsync();
             //  var usersToReturn = mapper.Map<IEnumerable<MemberDto>>(users); // Map from AppUser to MemberDto
             var usersToReturn = await userRepository.GetMembersAsync();
-            return  Ok(usersToReturn); // for get we return ok 200 response
+
+            if (usersToReturn.Any())
+            {
+                return Ok(usersToReturn);
+            }
+            else
+            {
+                return NotFound();
+            }
         }
 
   

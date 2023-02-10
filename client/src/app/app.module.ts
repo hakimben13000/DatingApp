@@ -4,7 +4,7 @@ import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { NavComponent } from './nav/nav.component';
-import { FormsModule } from '@angular/forms';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { HomeComponent } from './home/home.component';
 import { RegisterComponent } from './register/register.component';
@@ -22,6 +22,8 @@ import { JwtInterceptor } from './_interceptors/jwt.interceptor';
 import { MemberEditComponent } from './members/member-edit/member-edit.component';
 import { LoadingInterceptor } from './_interceptors/loading.interceptor';
 import { PhotoEditorComponent } from './members/photo-editor/photo-editor.component';
+import { TextInputComponent } from './_forms/text-input/text-input.component';
+import { DatePickerComponent } from './_forms/date-picker/date-picker.component';
 
 
 @NgModule({
@@ -37,13 +39,14 @@ import { PhotoEditorComponent } from './members/photo-editor/photo-editor.compon
     TestErrorComponent,
     NotFoundComponent,
     ServerErrorComponent, //  pour gérer les erreurs HTTP
-    MemberCardComponent, MemberEditComponent, PhotoEditorComponent
+    MemberCardComponent, MemberEditComponent, PhotoEditorComponent, TextInputComponent, DatePickerComponent
   ],
   imports: [
     BrowserModule,
     AppRoutingModule, // pour gérer les routes de l'application 
     HttpClientModule, // permet d'ajouter un module de requêtes HTTP
-    FormsModule, // permet d'ajouter un module de formulaires réactifs (ngModel) 
+    FormsModule, // permet d'ajouter un module de formulaires réactifs (ngModel),
+    ReactiveFormsModule, // permet d'ajouter un module de formulaires réactifs (ngModel),
     BrowserAnimationsModule, // pour gérer les animations de l'application 
     SharedModule 
   ],
